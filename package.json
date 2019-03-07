@@ -1,0 +1,23 @@
+{
+  "name": "blockchain_of_doom",
+  "version": "1.0.0",
+  "description": "a blockchain marketplace",
+  "main": "index.js",
+  "dependencies": {
+    "truffle": "^5.0.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vinnoff/blockchain-marketplace.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vinnoff/blockchain-marketplace/issues"
+  },
+  "homepage": "https://github.com/Vinnoff/blockchain-marketplace#readme"
+}
