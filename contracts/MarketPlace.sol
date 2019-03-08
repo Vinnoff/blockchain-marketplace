@@ -18,8 +18,8 @@ contract MarketPlaceContract {
 
     function buyHouse(address _client, address _tasker, uint _house) public {
         require(_client == msg.sender);
-
         (,,,payAmount,) = houseContract.getHouse(_house);
+        require(msg.value == payAmount);
         _tasker.transfer(payAmount);
         houseContract.setOwner(msg.sender, _house);
     }
