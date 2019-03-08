@@ -23,9 +23,19 @@ contract MarketPlaceContract {
         _tasker.transfer(payAmount);
         houseContract.setOwner(msg.sender, _house);
     }
+
+    function createHouse(address _owner, string place, string name, uint price) public {
+        require(_owner == msg.sender);
+        houseContract.createHouse(msg.sender, place, name, price);
+    }
 }
 
 contract HouseInterface {
+    mapping (uint => address) public houseToOwner;
+    uint houseCount;
+
+    House[] storage houses;
+
     struct House {
         string place;
         string name;
@@ -35,15 +45,17 @@ contract HouseInterface {
     }
 
     function getHouse(uint256 _id) external view returns (
-        string place,
-        string name,
-        bool isSold,
-        uint price,
-        address _owner
+        houses[_id];
     );
 
     function setOwner(address _buyer, uint _houseId) private {
         House storage house = houses[_houseId];
         house._owner = _buyer;
+    }
+
+    function createHouse(address _owner, string place, string name, uint price) private {
+        uint id = houses.push(House(place, name, false, price, _owner)) -1;
+        houseToOwner[id] = _owner;
+        houseCount++;
     }
 }
