@@ -1,9 +1,6 @@
 pragma solidity ^0.4.4;
 
 contract MarketPlaceContract {
-    address public client;
-    address public tasker;
-
     uint256 public payAmount;
     HouseInterface houseContract;
 
@@ -28,6 +25,11 @@ contract MarketPlaceContract {
         require(_owner == msg.sender);
         houseContract.createHouse(msg.sender, place, name, price);
     }
+
+    function displayHouses(address _client) public {
+        require(_client == msg.sender);
+        houseContract.getHouses(msg.sender);
+    }
 }
 
 contract HouseInterface {
@@ -44,18 +46,22 @@ contract HouseInterface {
         address _seller;
     }
 
-    function getHouse(uint256 _id) external view returns (
-        houses[_id];
-    );
+    function getHouse(uint256 _id) internal view {
+        return houses[_id];
+    }
 
-    function setOwner(address _buyer, uint _houseId) private {
+    function setOwner(address _buyer, uint _houseId) internal {
         House storage house = houses[_houseId];
         house._owner = _buyer;
     }
 
-    function createHouse(address _owner, string place, string name, uint price) private {
+    function createHouse(address _owner, string place, string name, uint price) internal {
         uint id = houses.push(House(place, name, false, price, _owner)) -1;
         houseToOwner[id] = _owner;
         houseCount++;
+    }
+
+    function getHouses() internal view {
+        return houses;
     }
 }
