@@ -6,8 +6,11 @@
   "dependencies": {
     "truffle": "^5.0.7"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "lite-server": "^2.3.0"
+  },
   "scripts": {
+    "dev": "lite-server",
     "test": "mocha"
   },
   "repository": {
